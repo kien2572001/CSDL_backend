@@ -3,7 +3,7 @@ use  shop;
 CREATE TABLE `user` (
     `cid` INT NOT NULL AUTO_INCREMENT,
     `userName` VARCHAR(50) NOT NULL,
-    `passWord` VARCHAR(50) NOT NULL,
+    `passWord` VARCHAR(255) NOT NULL,
     `roleId` SMALLINT NOT NULL DEFAULT 0,
     `lastLogin` DATETIME NULL DEFAULT NULL,
     `phone` CHAR(10) NOT NULL,

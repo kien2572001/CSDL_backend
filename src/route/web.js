@@ -15,7 +15,9 @@ let initWebRoutes = (app)=>{
     router.get('/add-user',homeController.getAddNewUser)
     router.post('/post-add-user',homeController.postAddNewUser)
 
+    // API
     router.get('/api/all-user',userController.getAllUser)
+    router.post('/api/login',userController.handleUserLogin)
 
     return app.use("/",router)
 

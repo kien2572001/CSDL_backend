@@ -20,5 +20,11 @@ module.exports = class User{
         return db.execute('SELECT * from user')
     }
     
-    
+    static checkUserNameExist(userName){
+        return db.execute(`SELECT * from user where userName = ? limit 1`,[userName])
+    }
+
+    static checkUserNameAndPassWord(userName,passWord){
+        return db.execute(`SELECT * from user where userName = ? and passWord = ? limit 1`,[userName,passWord])
+    }
 }
