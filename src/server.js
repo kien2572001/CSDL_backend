@@ -2,7 +2,6 @@ import express from "express";
 import bodyParser from "body-parser";
 import viewEngine from "./config/viewEngine";
 import initWebRoutes from './route/web';
-import Customer from './models/User'
 require('dotenv').config();
 
 

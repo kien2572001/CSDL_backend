@@ -12,6 +12,9 @@ let initWebRoutes = (app)=>{
     router.get('/home',homeController.getHomePage)
 
 
+    router.get('/add-user',homeController.getAddNewUser)
+    router.post('/post-add-user',homeController.postAddNewUser)
+
     router.get('/api/all-user',userController.getAllUser)
 
     return app.use("/",router)
