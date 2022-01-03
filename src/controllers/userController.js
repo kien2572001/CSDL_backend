@@ -13,9 +13,7 @@ let getAllUser =  async (req,res)=>{
         .catch(e=>{
             console.log(e)
         })
-
-    
-    
+   
 }
 
 let handleUserLogin = async (req,res)=>{

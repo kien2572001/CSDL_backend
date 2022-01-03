@@ -27,7 +27,7 @@ let checkPassWord = (userName,passWord)=>{
             let user = data[0]
             //console.log('trong ham check',user)
             let check = bcrypt.compareSync(passWord,user[0].passWord)
-            console.log(check)
+            //console.log(check)
             if (check){
                 resolve(user[0])
             }
