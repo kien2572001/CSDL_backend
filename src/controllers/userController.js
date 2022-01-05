@@ -57,9 +57,7 @@ let handleUserLogin = async (req,res)=>{
     
 }
 
-
-
 module.exports = {
     getAllUser: getAllUser,
-    handleUserLogin: handleUserLogin
+    handleUserLogin: handleUserLogin,
 }

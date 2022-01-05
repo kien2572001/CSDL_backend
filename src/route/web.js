@@ -1,6 +1,7 @@
 import express from "express";
 import homeController from '../controllers/homeController'
 import userController from '../controllers/userController'
+import productController from '../controllers/productController'
 
 let router = express.Router()
 
@@ -18,6 +19,7 @@ let initWebRoutes = (app)=>{
     // API
     router.get('/api/all-user',userController.getAllUser)
     router.post('/api/login',userController.handleUserLogin)
+    router.get('/api/get-product',productController.handleGetProductByCategory)
 
     return app.use("/",router)
 
