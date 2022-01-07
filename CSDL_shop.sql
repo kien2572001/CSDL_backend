@@ -18,7 +18,7 @@ CREATE TABLE `user` (
 );
 
 insert into `user` (userName,`passWord`,roleID,phone,address,firstName,lastName,createdAt,updatedAt)
-values ('kien2572001.ntk@gmail.com','123456',0,'1111232','Ha Noi','abc','xyz',NOW(),NOW());
+values ('kien2572001.ntk@gmail.com','$2b$10$8WscL.rgGMXYUapqR3wDze02ntw3z2HyWK7B/VduEpCdoxEgDKkYm',0,'1111232','Ha Noi','abc','xyz',NOW(),NOW());
 
 
 
@@ -40,7 +40,7 @@ create table `store`(
 create table `product`(
 	`pid` int  not null auto_increment,
     `title` varchar(50) not null,
-    `price`	float not null default 0,
+    `price`	decimal(7,2) not null default 0,
     `quantity` int not null default 0,
     `sid` int not null,
 	createdAt datetime not null,
@@ -623,4 +623,16 @@ values
 ('Imperial Long Jing Tea',5,50,1,NOW(),NOW(),0,'https://pickbazar-react-rest.vercel.app/_next/image?url=https%3A%2F%2Fpickbazarlaravel.s3.ap-southeast-1.amazonaws.com%2F389%2Fimperial_tea_longjing_tea.jpg&w=640&q=75','Tea is an aromatic beverage commonly prepared by pouring hot or boiling water over cured leaves of the Camellia sinensis, an evergreen shrub native to East Asia. After water, it is the most widely consumed drink in the world.','0.5lb'),
 ('Crystal Light Lemon Iced Tea',5,50,1,NOW(),NOW(),30,'https://pickbazar-react-rest.vercel.app/_next/image?url=https%3A%2F%2Fpickbazarlaravel.s3.ap-southeast-1.amazonaws.com%2F390%2Fcrystal_light_lemon_iced_tea.jpg&w=640&q=75','Tea is an aromatic beverage commonly prepared by pouring hot or boiling water over cured leaves of the Camellia sinensis, an evergreen shrub native to East Asia. After water, it is the most widely consumed drink in the world.','0.5lb')
 ;
+
+select * from product
+where pid in (
+	select `pid` from product_category
+    inner join category on category.id = product_category.categoryId
+	where category.title like 'Fruits & Vegetables'
+);
+
+
+select * from product_category
+inner join category on product_category.categoryId = category.id
+where pid=1;
 
