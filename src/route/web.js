@@ -20,6 +20,8 @@ let initWebRoutes = (app)=>{
     router.get('/api/all-user',userController.getAllUser)
     router.post('/api/login',userController.handleUserLogin)
     router.get('/api/get-product',productController.handleGetProductByCategory)
+    router.get('/api/get-category-by-id',productController.handleGetCategoryById)
+    router.get('/api/get-store-by-id',productController.handleGetStoreById)
 
     return app.use("/",router)
 
