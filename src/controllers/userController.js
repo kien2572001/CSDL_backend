@@ -57,7 +57,28 @@ let handleUserLogin = async (req,res)=>{
     
 }
 
+let handleSaveOrder =  async (req,res)=>{
+    try {
+        //console.log(req.body)
+        let order = {
+            orderId: req.body.orderId,
+            cid: req.body.cid,
+            status: req.body.status,
+            total: req.body.total,
+            phone: req.body.phone,
+            address: req.body.address,
+            delivery: req.body.delivery
+        }
+        await userService.saveOrder(order)
+        return res.status(200).json('Success')
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+
 module.exports = {
     getAllUser: getAllUser,
     handleUserLogin: handleUserLogin,
+    handleSaveOrder: handleSaveOrder
 }

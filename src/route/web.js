@@ -22,7 +22,10 @@ let initWebRoutes = (app)=>{
     router.get('/api/get-product',productController.handleGetProductByCategory)
     router.get('/api/get-category-by-id',productController.handleGetCategoryById)
     router.get('/api/get-store-by-id',productController.handleGetStoreById)
-
+    router.post('/api/save-order',userController.handleSaveOrder)
+    router.post('/api/save-to-order-item',productController.handleSaveToOrderItem)
+    router.get('/api/find-order-by-id',productController.handleFindOrderById)
+    router.get('/api/find-product-by-id',productController.handleFindProductById)
     return app.use("/",router)
 
 }

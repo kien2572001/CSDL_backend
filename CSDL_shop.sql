@@ -94,20 +94,23 @@ create table product_review(
 );
 
 create table `order`(
-	`orderId` int not null auto_increment,
+	`orderId` VARCHAR(50)CHARACTER SET UTF8MB4 NOT NULL,
     `cid` int not null,
-	`total` FLOAT NOT NULL DEFAULT 0,   
+    `status` VARCHAR(255)CHARACTER SET UTF8MB4 NOT NULL,
+	`total`	decimal(7,2) not null default 0,
 	`createdAt` DATETIME NOT NULL,
+    `phone` VARCHAR(255)CHARACTER SET UTF8MB4 NOT NULL,
+    `address` VARCHAR(255)CHARACTER SET UTF8MB4 NOT NULL,
+    `delivery` VARCHAR(255)CHARACTER SET UTF8MB4 NOT NULL,
     foreign key (cid) references `user`(cid),
     primary key (orderId)
 );
 
 create table `order_item` (
-	`orderId` int not null,
+	`orderId` VARCHAR(50)CHARACTER SET UTF8MB4 NOT NULL,
     `pid` int not null,
-    `price` bigint not null default 0, 
+    `price`	decimal(7,2) not null default 0,
     `quantity` int not null default 0,
-	`discount` int not null default 0,
     foreign key (orderId) references `order`(orderId),
     foreign key (pid) references product(pid),
     constraint PK_order_item primary key(orderId,pid)

@@ -1,4 +1,5 @@
 import Product from '../models/Product'
+import db from '../ulti/db'
 
 let getProductByCategory = (category)=>{
     return new Promise(async(resolve,reject)=>{
@@ -45,8 +46,47 @@ let getStoreById = (id)=>{
     })
 }
 
+let saveToOrderItem = async (item)=>{
+    return new Promise (async (resolve,reject)=>{
+        try {
+            let data = await db.execute(`insert into order_item  (orderId,pid,price,quantity)
+                values (?,?,?,?);`,[item.orderId,item.pid,item.price,item.quantity])
+            resolve(true)
+        } catch (error) {
+            reject(error)
+        }
+    })
+
+}
+
+let findOrderById = (id)=>{
+    return new Promise(async (resolve,reject)=>{
+        try {
+            let data = await db.execute('select  DISTINCT * from `order`inner join order_item on `order`.orderId = order_item.orderId where `order`.orderId = "' +id  + '";')
+            resolve(data)
+        } catch (error) {
+            reject(error)
+        }
+    })
+}
+
+
+let findProductById = (id)=>{
+    return new Promise(async(resolve,reject)=>{
+        try {
+            let data = await db.execute('select * from product where pid = ?;',[id])
+            resolve(data)
+        } catch (error) {
+            reject(error)
+        }
+    })
+}
+
 module.exports = {
     getProductByCategory: getProductByCategory,
     getCategoryById: getCategoryById,
-    getStoreById: getStoreById
+    getStoreById: getStoreById,
+    saveToOrderItem: saveToOrderItem,
+    findOrderById: findOrderById,
+    findProductById: findProductById,
 }

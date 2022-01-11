@@ -36,8 +36,48 @@ let handleGetStoreById = async (req,res)=>{
     }
 }
 
+let handleSaveToOrderItem = async (req,res)=>{
+    try {
+        let item = {
+            orderId: req.body.orderId,
+            pid: req.body.pid,
+            price: req.body.price,
+            quantity: req.body.quantity
+        }
+        //console.log(item)
+        let data = await productService.saveToOrderItem(item)
+        return res.status(200).json('OK')
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+let handleFindOrderById = async(req,res)=>{
+    try {
+        let id = req.query.id
+        let data = await productService.findOrderById(id)
+        //console.log(data[0])
+        return res.status(200).json(data[0])
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+let handleFindProductById = async (req,res)=>{
+    let id = req.query.id
+    try {
+        let data = await productService.findProductById(id)
+        return res.status(200).json(data[0])
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 module.exports = {
     handleGetProductByCategory: handleGetProductByCategory,
     handleGetCategoryById: handleGetCategoryById,
-    handleGetStoreById: handleGetStoreById
+    handleGetStoreById: handleGetStoreById,
+    handleSaveToOrderItem: handleSaveToOrderItem,
+    handleFindOrderById: handleFindOrderById,
+    handleFindProductById: handleFindProductById,
 }
