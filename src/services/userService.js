@@ -54,8 +54,20 @@ let saveOrder = (order)=>{
     })
 }
 
+let findOrderByUserId = (id)=>{
+    return new Promise (async(resolve,reject)=>{
+        try {
+            let data = await db.execute('select * from `order` where cid = ?',[id])
+            resolve(data)
+        } catch (error) {
+            reject(error)
+        }
+    })
+}
+
 module.exports = {
     checkUserNameExist: checkUserNameExist,
     checkPassWord: checkPassWord,
-    saveOrder: saveOrder
+    saveOrder: saveOrder,
+    findOrderByUserId: findOrderByUserId
 }

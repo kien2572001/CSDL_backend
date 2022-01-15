@@ -73,6 +73,8 @@ let handleFindProductById = async (req,res)=>{
     }
 }
 
+
+
 module.exports = {
     handleGetProductByCategory: handleGetProductByCategory,
     handleGetCategoryById: handleGetCategoryById,

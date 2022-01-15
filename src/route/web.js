@@ -26,6 +26,8 @@ let initWebRoutes = (app)=>{
     router.post('/api/save-to-order-item',productController.handleSaveToOrderItem)
     router.get('/api/find-order-by-id',productController.handleFindOrderById)
     router.get('/api/find-product-by-id',productController.handleFindProductById)
+    router.get('/api/find-order-by-userid',userController.handleFindOrderByUserId)
+    router.get('/api/change-password',userController.handleChangePassWord)
     return app.use("/",router)
 
 }
