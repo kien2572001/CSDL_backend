@@ -82,6 +82,17 @@ let findProductById = (id)=>{
     })
 }
 
+let findProductByStoreId = (storeId)=>{
+    return new Promise(async (resolve,reject)=>{
+        try {
+            let data = await db.execute('select * from product where sid = ? ;',[storeId])
+            resolve(data[0])
+        } catch (error) {
+            reject(error)
+        }
+    })
+}
+
 module.exports = {
     getProductByCategory: getProductByCategory,
     getCategoryById: getCategoryById,
@@ -89,4 +100,5 @@ module.exports = {
     saveToOrderItem: saveToOrderItem,
     findOrderById: findOrderById,
     findProductById: findProductById,
+    findProductByStoreId: findProductByStoreId
 }

@@ -1,5 +1,6 @@
 import db from "../ulti/db";
 import productService from '../services/productService'
+import res from "express/lib/response";
 
 let handleGetProductByCategory = async (req,res)=>{
     try {
@@ -73,7 +74,17 @@ let handleFindProductById = async (req,res)=>{
     }
 }
 
-
+let handleGetProductByStoreId = async (req,res)=>{   
+    try {
+        let storeId  = req.query.sid
+        let data = await productService.findProductByStoreId(storeId)
+        return res.status(200).json({
+            products: data
+        })
+    } catch (error) {
+        console.log(error)
+    }
+}
 
 module.exports = {
     handleGetProductByCategory: handleGetProductByCategory,
@@ -82,4 +93,5 @@ module.exports = {
     handleSaveToOrderItem: handleSaveToOrderItem,
     handleFindOrderById: handleFindOrderById,
     handleFindProductById: handleFindProductById,
+    handleGetProductByStoreId: handleGetProductByStoreId
 }

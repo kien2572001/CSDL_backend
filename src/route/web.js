@@ -2,6 +2,7 @@ import express from "express";
 import homeController from '../controllers/homeController'
 import userController from '../controllers/userController'
 import productController from '../controllers/productController'
+import adminController from '../controllers/adminController'
 
 let router = express.Router()
 
@@ -28,6 +29,13 @@ let initWebRoutes = (app)=>{
     router.get('/api/find-product-by-id',productController.handleFindProductById)
     router.get('/api/find-order-by-userid',userController.handleFindOrderByUserId)
     router.get('/api/change-password',userController.handleChangePassWord)
+
+    //admin
+    router.post('/api/admin/login',adminController.handleAdminLogin)
+
+    //product
+    router.get('/api/get-product-by-storeId',productController.handleGetProductByStoreId)
+
     return app.use("/",router)
 
 }
