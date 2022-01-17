@@ -47,6 +47,7 @@ let initWebRoutes = (app)=>{
 
     //user
     router.post('/api/change-password',userController.handleChangePassWord)
+    router.post('/api/change-fla',userController.handleChangeFirstNameLastNameAvatar)
 
     //admin
     router.post('/api/admin/login',adminController.handleAdminLogin)

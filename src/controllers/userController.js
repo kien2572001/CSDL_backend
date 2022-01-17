@@ -108,10 +108,29 @@ let handleChangePassWord = async(req,res)=>{
     }
 }
 
+let handleChangeFirstNameLastNameAvatar = async (req,res)=>{
+    try {
+        //console.log(req)
+        let firstName = req.body.firstName
+        let lastName = req.body.lastName
+        let ava = req.body.image
+        let cid = req.body.cid
+        let tmp = {
+            firstName,lastName,ava,cid
+        }
+        console.log('data',tmp)
+        let data = await userService.changeFirstNameLastNameAvatar(cid,firstName,lastName,ava)
+        return res.status(200).json(data)
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 module.exports = {
     getAllUser: getAllUser,
     handleUserLogin: handleUserLogin,
     handleSaveOrder: handleSaveOrder,
     handleFindOrderByUserId: handleFindOrderByUserId,
-    handleChangePassWord: handleChangePassWord
+    handleChangePassWord: handleChangePassWord,
+    handleChangeFirstNameLastNameAvatar: handleChangeFirstNameLastNameAvatar
 }

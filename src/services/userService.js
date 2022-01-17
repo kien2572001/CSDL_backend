@@ -78,10 +78,22 @@ let saveNewPassWord = (userName,newPassWord)=>{
     })
 }
 
+let changeFirstNameLastNameAvatar = (cid,firstName,lastName,ava)=>{
+    return new Promise( async(resolve,reject)=>{
+        try {
+            let data = await db.execute("update `user` set firstName = ? , lastName = ? , image = ? where cid = ? ;",[firstName,lastName,ava,cid])
+            resolve(data[0])
+        } catch (error) {
+            reject(error)
+        }
+    })
+}
+
 module.exports = {
     checkUserNameExist: checkUserNameExist,
     checkPassWord: checkPassWord,
     saveOrder: saveOrder,
     findOrderByUserId: findOrderByUserId,
-    saveNewPassWord: saveNewPassWord
+    saveNewPassWord: saveNewPassWord,
+    changeFirstNameLastNameAvatar: changeFirstNameLastNameAvatar
 }
