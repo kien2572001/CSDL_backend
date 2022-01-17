@@ -2,6 +2,8 @@ import express from "express";
 import bodyParser from "body-parser";
 import viewEngine from "./config/viewEngine";
 import initWebRoutes from './route/web';
+//const uploadRouter = require('./routes/upload');
+
 require('dotenv').config();
 
 
@@ -29,6 +31,7 @@ app.use(function (req, res, next) {
 //Config
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
+// app.use('/uploads', uploadRouter);
 
 viewEngine(app)
 initWebRoutes(app)

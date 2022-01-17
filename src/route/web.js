@@ -3,7 +3,7 @@ import homeController from '../controllers/homeController'
 import userController from '../controllers/userController'
 import productController from '../controllers/productController'
 import adminController from '../controllers/adminController'
-
+const fileUploader = require('../config/cloudinary.config');
 let router = express.Router()
 
 let initWebRoutes = (app)=>{
@@ -18,6 +18,22 @@ let initWebRoutes = (app)=>{
     router.post('/post-add-user',homeController.postAddNewUser)
 
     // API
+    //upload anh
+    router.post('/cloudinary-upload', fileUploader.single('file'), (req, res, next) => {
+        if (!req.file) {
+          next(new Error('No file uploaded!'));
+          return;
+        }
+        //const newImage  = new UploadedFile({title: req.file.filename, fileUrl: req.file.path})
+        return  res.json({ secure_url: req.file.path })
+        // newImage.save((err) => {
+        //   if (err) {
+        //     return res.status(500)
+        //   }
+        //    return  res.json({ secure_url: req.file.path })
+        // })
+      });
+
     router.get('/api/all-user',userController.getAllUser)
     router.post('/api/login',userController.handleUserLogin)
     router.get('/api/get-product',productController.handleGetProductByCategory)

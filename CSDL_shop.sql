@@ -17,11 +17,11 @@ CREATE TABLE `user` (
     CONSTRAINT PK_Person PRIMARY KEY (cid)
 );
 
-insert into `user` (userName,`passWord`,roleID,phone,address,firstName,lastName,createdAt,updatedAt)
-values ('kien@gmail.com','$2b$10$8WscL.rgGMXYUapqR3wDze02ntw3z2HyWK7B/VduEpCdoxEgDKkYm',0,'1111232','Ha Noi','abc','xyz',NOW(),NOW()),
-('vinh@gmail.com','$2b$10$8WscL.rgGMXYUapqR3wDze02ntw3z2HyWK7B/VduEpCdoxEgDKkYm',0,'1111232','Ha Noi','abc','xyz',NOW(),NOW()),
-('dung@gmail.com','$2b$10$8WscL.rgGMXYUapqR3wDze02ntw3z2HyWK7B/VduEpCdoxEgDKkYm',0,'1111232','Ha Noi','abc','xyz',NOW(),NOW()),
-('hieu@gmail.com','$2b$10$8WscL.rgGMXYUapqR3wDze02ntw3z2HyWK7B/VduEpCdoxEgDKkYm',0,'1111232','Ha Noi','abc','xyz',NOW(),NOW());
+insert into `user` (userName,`passWord`,roleID,phone,address,firstName,lastName,createdAt,updatedAt,image)
+values ('kien@gmail.com','$2b$10$8WscL.rgGMXYUapqR3wDze02ntw3z2HyWK7B/VduEpCdoxEgDKkYm',0,'1111232','Ha Noi','abc','xyz',NOW(),NOW(),'https://phunugioi.com/wp-content/uploads/2020/01/anh-avatar-supreme-dep-lam-dai-dien-facebook.jpg'),
+('vinh@gmail.com','$2b$10$8WscL.rgGMXYUapqR3wDze02ntw3z2HyWK7B/VduEpCdoxEgDKkYm',0,'1111232','Ha Noi','abc','xyz',NOW(),NOW(),'https://phunugioi.com/wp-content/uploads/2020/01/anh-avatar-supreme-dep-lam-dai-dien-facebook.jpg'),
+('dung@gmail.com','$2b$10$8WscL.rgGMXYUapqR3wDze02ntw3z2HyWK7B/VduEpCdoxEgDKkYm',0,'1111232','Ha Noi','abc','xyz',NOW(),NOW(),'https://phunugioi.com/wp-content/uploads/2020/01/anh-avatar-supreme-dep-lam-dai-dien-facebook.jpg'),
+('hieu@gmail.com','$2b$10$8WscL.rgGMXYUapqR3wDze02ntw3z2HyWK7B/VduEpCdoxEgDKkYm',0,'1111232','Ha Noi','abc','xyz',NOW(),NOW(),'https://phunugioi.com/wp-content/uploads/2020/01/anh-avatar-supreme-dep-lam-dai-dien-facebook.jpg');
 
 
 create table `store`(
