@@ -89,11 +89,20 @@ let handleFindOrderByUserId = async (req,res)=>{
 
 let handleChangePassWord = async(req,res)=>{
     try {
+        //console.log(req.body)
         let userName = req.body.userName
-        let passWord = req.body.passWord
-        let rePassWord = req.body.rePassWord
-        let data = userService.checkPassWord(userName,passWord)
-        return res.status(200).json(data)
+        let oldPassWord = req.body.oldPassWord
+        let newPassWord = req.body.newPassWord
+        let data = await userService.checkPassWord(userName,oldPassWord)
+        //console.log('data:',data)
+        if (data===null){
+            return res.status(200).json({message: 'Wrong old pass'})
+        }
+        let data1 = await userService.saveNewPassWord(userName,newPassWord)
+        //console.log('data1: ',data1)
+        if (data1.affectedRows ===1)    return res.status(200).json({message: 'Success'})
+
+        
     } catch (error) {
         console.log(error)
     }

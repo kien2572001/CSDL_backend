@@ -1,6 +1,7 @@
 import User from '../models/User'
-const bcrypt = require('bcrypt');
 import db from '../ulti/db'
+const bcrypt = require('bcrypt');
+var salt = bcrypt.genSaltSync(10)
 
 let checkUserNameExist =  (userName)=>{
 
@@ -65,9 +66,22 @@ let findOrderByUserId = (id)=>{
     })
 }
 
+let saveNewPassWord = (userName,newPassWord)=>{
+    return new Promise (async(resolve,reject)=>{
+        try {
+            let hash = bcrypt.hashSync(newPassWord, salt);
+            let data = await db.execute('update user set passWord = ? where userName = ?;',[hash,userName])
+            resolve(data[0])
+        } catch (error) {
+            reject(error)
+        }
+    })
+}
+
 module.exports = {
     checkUserNameExist: checkUserNameExist,
     checkPassWord: checkPassWord,
     saveOrder: saveOrder,
-    findOrderByUserId: findOrderByUserId
+    findOrderByUserId: findOrderByUserId,
+    saveNewPassWord: saveNewPassWord
 }
