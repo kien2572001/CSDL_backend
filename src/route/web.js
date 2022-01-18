@@ -1,4 +1,4 @@
-import express from "express";
+import express, { Router } from "express";
 import homeController from '../controllers/homeController'
 import userController from '../controllers/userController'
 import productController from '../controllers/productController'
@@ -48,12 +48,21 @@ let initWebRoutes = (app)=>{
     //user
     router.post('/api/change-password',userController.handleChangePassWord)
     router.post('/api/change-fla',userController.handleChangeFirstNameLastNameAvatar)
+    router.get('/api/get-userinfo-by-cid',userController.handleGetUserInfoByCid)
 
     //admin
     router.post('/api/admin/login',adminController.handleAdminLogin)
+    router.get('/api/admin/get-order-by-sid',adminController.handleGetOrderBySid)
+    router.get('/api/get-order-item-by-sid-orderid',adminController.handleGetOrderItemBySidAndOrderId)
+    router.post('/api/change-order-status',adminController.handleChangeOrderStatus)
+    router.get('/api/get-product-by-sid',adminController.handleGetProductBySid)
 
     //product
     router.get('/api/get-product-by-storeId',productController.handleGetProductByStoreId)
+    router.post('/api/delete-product-by-pid',productController.handleDeleteProductById)
+
+    //category
+    router.get('/api/get-all-category',productController.handleGetAllCategory)
 
     return app.use("/",router)
 

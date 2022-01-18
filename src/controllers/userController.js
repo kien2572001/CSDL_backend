@@ -126,11 +126,23 @@ let handleChangeFirstNameLastNameAvatar = async (req,res)=>{
     }
 }
 
+
+let handleGetUserInfoByCid =async (req,res)=>{
+    try {
+        let cid = req.query.cid
+        let data = await userService.getUserInfoByCid(cid)
+        return res.status(200).json(data[0])
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 module.exports = {
     getAllUser: getAllUser,
     handleUserLogin: handleUserLogin,
     handleSaveOrder: handleSaveOrder,
     handleFindOrderByUserId: handleFindOrderByUserId,
     handleChangePassWord: handleChangePassWord,
-    handleChangeFirstNameLastNameAvatar: handleChangeFirstNameLastNameAvatar
+    handleChangeFirstNameLastNameAvatar: handleChangeFirstNameLastNameAvatar,
+    handleGetUserInfoByCid: handleGetUserInfoByCid,
 }

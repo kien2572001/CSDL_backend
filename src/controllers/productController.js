@@ -86,6 +86,25 @@ let handleGetProductByStoreId = async (req,res)=>{
     }
 }
 
+let handleDeleteProductById = async (req,res)=>{
+    try {
+        let pid = req.body.pid
+        let data = await productService.deleteProductById(pid)
+        return res.status(200).json(data)
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+let handleGetAllCategory = async (req,res)=>{
+    try {
+        let data = await productService.getAllCategory()
+        return res.status(200).json(data[0])
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 module.exports = {
     handleGetProductByCategory: handleGetProductByCategory,
     handleGetCategoryById: handleGetCategoryById,
@@ -93,5 +112,7 @@ module.exports = {
     handleSaveToOrderItem: handleSaveToOrderItem,
     handleFindOrderById: handleFindOrderById,
     handleFindProductById: handleFindProductById,
-    handleGetProductByStoreId: handleGetProductByStoreId
+    handleGetProductByStoreId: handleGetProductByStoreId,
+    handleDeleteProductById: handleDeleteProductById,
+    handleGetAllCategory: handleGetAllCategory,
 }

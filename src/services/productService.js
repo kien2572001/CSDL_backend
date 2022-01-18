@@ -93,6 +93,29 @@ let findProductByStoreId = (storeId)=>{
     })
 }
 
+let deleteProductById = async (pid)=>{
+    return new Promise ( async(resolve,reject)=>{
+        try {
+            let data1 = await db.execute('delete from product_category where pid = ?;',[pid])
+            let data = await db.execute('delete from product where pid = ?;',[pid])           
+            resolve(data)
+        } catch (error) {
+            reject(error)
+        }
+    })
+}
+
+let getAllCategory = ()=>{
+    return new Promise(async(resolve,reject)=>{
+        try {
+            let data = await db.execute('select * from category')
+            resolve(data)
+        } catch (error) {
+            reject(error)
+        }
+    })
+}
+
 module.exports = {
     getProductByCategory: getProductByCategory,
     getCategoryById: getCategoryById,
@@ -100,5 +123,7 @@ module.exports = {
     saveToOrderItem: saveToOrderItem,
     findOrderById: findOrderById,
     findProductById: findProductById,
-    findProductByStoreId: findProductByStoreId
+    findProductByStoreId: findProductByStoreId,
+    deleteProductById: deleteProductById,
+    getAllCategory: getAllCategory
 }

@@ -34,7 +34,8 @@ create table `store`(
     content TEXT  CHARACTER SET utf8mb4 null default null,
     createdAt datetime not null,
     updatedAt datetime not null,
-    constraint PK_store primary key (sid)
+    img TEXT,
+    constraint PK_store primary key (sid) 
 );
 
 
@@ -51,49 +52,29 @@ create table `product`(
     img TEXT not null,
     content TEXT  CHARACTER SET utf8mb4 null default null,
     unit varchar(20) not null,
-	CONSTRAINT PK_product PRIMARY KEY(pid),
-    CONSTRAINT FK_store FOREIGN KEY (sid) REFERENCES store(sid)
+	CONSTRAINT PK_product PRIMARY KEY(pid) ,
+    CONSTRAINT FK_store FOREIGN KEY (sid) REFERENCES store(sid) ON DELETE CASCADE 
 );
 
 
 
 -- ID -> int
 
-
-create table cart_item(
-	`cid` int not null,
-    `pid` int not null,
-    `quantity` int not null default 0,
-    foreign key (cid) references `user`(cid),
-    foreign key (pid) references product(pid),
-    constraint PK_cart_item primary key(cid,pid)
-);
-
 create table category(
 	id int not null auto_increment,
     title varchar(75) not null,
-    primary key(id)
+    primary key(id) 
 );
 
 
 create table product_category(
 	`pid` int not null,
     categoryId int not null,
-    foreign key (categoryId) references category(id),
-    foreign key (pid) references product(pid),
-    primary key (`pid`,categoryId)
+    foreign key (categoryId) references category(id) ON DELETE CASCADE ,
+    foreign key (pid) references product(pid) ON DELETE CASCADE ,
+    primary key (`pid`,categoryId) 
 );
 
-create table product_review(
-	pid int not null,
-    cid int not null,
-    rating smallint not null,
-    publishedAt datetime not null,
-    content TEXT  CHARACTER SET utf8mb4 null default null,
-    primary key (pid,cid),
-    foreign key (cid) references `user`(cid),
-    foreign key (pid) references product(pid)
-);
 
 create table `order`(
 	`orderId` VARCHAR(50)CHARACTER SET UTF8MB4 NOT NULL,
@@ -104,8 +85,8 @@ create table `order`(
     `phone` VARCHAR(255)CHARACTER SET UTF8MB4 NOT NULL,
     `address` VARCHAR(255)CHARACTER SET UTF8MB4 NOT NULL,
     `delivery` VARCHAR(255)CHARACTER SET UTF8MB4 NOT NULL,
-    foreign key (cid) references `user`(cid),
-    primary key (orderId)
+    foreign key (cid) references `user`(cid) ON DELETE CASCADE ,
+    primary key (orderId) 
 );
 
 create table `order_item` (
@@ -113,15 +94,16 @@ create table `order_item` (
     `pid` int not null,
     `price`	decimal(7,2) not null default 0,
     `quantity` int not null default 0,
-    foreign key (orderId) references `order`(orderId),
-    foreign key (pid) references product(pid),
-    constraint PK_order_item primary key(orderId,pid)
+    foreign key (orderId) references `order`(orderId) ON DELETE CASCADE ,
+    foreign key (pid) references product(pid) ON DELETE CASCADE ,
+    constraint PK_order_item primary key(orderId,pid) 
 );
 
 
 -- Them cua hang ban tap hoa 
-insert into `store` (userName,`passWord`,address,phone,storeName,content,createdAt,updatedAt)
-values ('shop@gmail.com','$2b$10$8WscL.rgGMXYUapqR3wDze02ntw3z2HyWK7B/VduEpCdoxEgDKkYm','address','01223213','Grocery','Shop ban hoa qua',now(),now());
+insert into `store` (userName,`passWord`,address,phone,storeName,content,createdAt,updatedAt,img)
+values ('shop@gmail.com','$2b$10$8WscL.rgGMXYUapqR3wDze02ntw3z2HyWK7B/VduEpCdoxEgDKkYm','address','01223213','Grocery','Shop ban hoa qua',now(),now(),'https://pickbazar-react-admin-rest.vercel.app/_next/image?url=https%3A%2F%2Fpickbazarlaravel.s3.ap-southeast-1.amazonaws.com%2F892%2FUntitled-2.jpg&w=1920&q=75'),
+('shop2@gmail.com','$2b$10$8WscL.rgGMXYUapqR3wDze02ntw3z2HyWK7B/VduEpCdoxEgDKkYm','address','01223213','DrinkShop','Ban nuoc tang luc',now(),now(),'https://pickbazar-react-admin-rest.vercel.app/_next/image?url=https%3A%2F%2Fpickbazarlaravel.s3.ap-southeast-1.amazonaws.com%2F883%2FUntitled-6.jpg&w=1920&q=75');
 
 -- Them phan loai category
 

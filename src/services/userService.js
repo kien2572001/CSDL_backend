@@ -89,11 +89,23 @@ let changeFirstNameLastNameAvatar = (cid,firstName,lastName,ava)=>{
     })
 }
 
+let getUserInfoByCid = (cid)=>{
+    return new Promise(async(resolve,reject)=>{
+        try {
+            let data = await db.execute('select * from user where cid = ?;',[cid])
+            resolve(data)
+        } catch (error) {
+            reject(error)
+        }
+    })
+}
+
 module.exports = {
     checkUserNameExist: checkUserNameExist,
     checkPassWord: checkPassWord,
     saveOrder: saveOrder,
     findOrderByUserId: findOrderByUserId,
     saveNewPassWord: saveNewPassWord,
-    changeFirstNameLastNameAvatar: changeFirstNameLastNameAvatar
+    changeFirstNameLastNameAvatar: changeFirstNameLastNameAvatar,
+    getUserInfoByCid: getUserInfoByCid
 }

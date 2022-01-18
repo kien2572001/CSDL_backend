@@ -45,4 +45,43 @@ let handleAdminLogin = async (req,res)=>{
     }
 }
 
-module.exports ={handleAdminLogin}
+let handleGetOrderBySid = async (req,res)=>{
+    try {
+        let data = await adminService.getOrderBySid(req.query.sid)
+        return res.status(200).json(data[0])
+    } catch (error) {
+        console.log(error)
+    }
+}   
+
+
+let handleGetOrderItemBySidAndOrderId = async (req,res)=>{
+    try {
+        let data = await adminService.getOrderItemBySidAndOrderId(req.query.orderId,req.query.sid)
+        return res.status(200).json(data[0])
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+let handleChangeOrderStatus  = async (req,res)=>{
+    try {
+        console.log(req.body)
+        let data = await adminService.changeOrderStatus(req.body.orderId,req.body.status)
+        return res.status(200).json(data)
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+let handleGetProductBySid = async (req,res)=>{
+    try {
+        let sid = req.query.sid
+        let data = await adminService.getProductBySid(sid)
+        return res.status(200).json(data[0])
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+module.exports ={handleAdminLogin,handleGetOrderBySid,handleGetOrderItemBySidAndOrderId,handleChangeOrderStatus,handleGetProductBySid}

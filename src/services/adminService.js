@@ -1,4 +1,5 @@
 const bcrypt = require('bcrypt');
+import { reject } from 'bcrypt/promises';
 import db from '../ulti/db'
 
 let checkExistUserName = (userName)=>{
@@ -49,4 +50,50 @@ let loginAdmin = (userName, passWord)=>{
 }
 
 
-module.exports = {loginAdmin,checkExistUserName,checkPassWord}
+let getOrderBySid =  (sid)=>{
+    return new Promise (async (resolve,reject)=>{
+        try {
+            let data = await db.execute('select * from `order` where orderId in (select distinct  `order`.orderId from `order` inner join  order_item on `order`.orderId = order_item.orderId inner join product on order_item.pid = product.pid where sid = ? );',[sid])
+            resolve(data)
+        } catch (error) {
+            reject(error)
+        }
+    })
+}
+
+
+let getOrderItemBySidAndOrderId = (orderId,sid)=>{
+    return new Promise (async (resolve,reject)=>{
+        try {
+            let data = await db.execute("select  `order`.orderId,order_item.price,order_item.quantity,order_item.pid,product.title,product.img from `order` inner join  order_item on `order`.orderId = order_item.orderId inner join product on order_item.pid = product.pid where sid = ? and `order`.orderId =  ?;",[sid,orderId])
+            resolve(data)
+        } catch (error) {
+            reject(error)
+        }
+    })
+}
+
+let changeOrderStatus = (orderId,status)=>{
+    return new Promise(async(resolve,reject)=>{
+        try {
+            let data = await db.execute('update `order` set status = ? where orderId = ?;',[status,orderId])
+            resolve(data)
+        } catch (error) {
+            reject(error)
+        }
+    })
+}
+
+
+let getProductBySid = (sid)=>{
+    return new Promise(async(resolve,reject)=>{
+        try {
+            let data = await db.execute('select * from product where sid = ?;',[sid])
+            resolve(data)
+        } catch (error) {
+            reject(error)
+        }
+    })
+}
+
+module.exports = {loginAdmin,checkExistUserName,checkPassWord,getOrderBySid,getOrderItemBySidAndOrderId,changeOrderStatus,getProductBySid}
