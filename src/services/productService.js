@@ -116,6 +116,7 @@ let getAllCategory = ()=>{
     })
 }
 
+
 module.exports = {
     getProductByCategory: getProductByCategory,
     getCategoryById: getCategoryById,

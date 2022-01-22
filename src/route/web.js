@@ -56,6 +56,14 @@ let initWebRoutes = (app)=>{
     router.get('/api/get-order-item-by-sid-orderid',adminController.handleGetOrderItemBySidAndOrderId)
     router.post('/api/change-order-status',adminController.handleChangeOrderStatus)
     router.get('/api/get-product-by-sid',adminController.handleGetProductBySid)
+    router.post('/api/add-new-product-by-store',adminController.handleAddNewProductByStore)
+    router.get('/api/get-next-pid',adminController.handleGetNextPid)
+    router.post('/api/add-product-category',adminController.handleAddProductCategory)
+    router.post('/api/update-product-by-store',adminController.handleUpdateProductByStore)
+    router.post('/api/search-by-filter',adminController.handleSearchByFilter)
+    router.get('/api/total30day',adminController.handleTotal30day)
+    router.get('/api/handleOrder30day',adminController.handleOrder30day)
+    router.get('/api/totalrevenue',adminController.handleTotalRevenue)
 
     //product
     router.get('/api/get-product-by-storeId',productController.handleGetProductByStoreId)
