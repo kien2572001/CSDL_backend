@@ -100,6 +100,9 @@ let initWebRoutes = (app) => {
   router.get("/api/total30day", adminController.handleTotal30day);
   router.get("/api/handleOrder30day", adminController.handleOrder30day);
   router.get("/api/totalrevenue", adminController.handleTotalRevenue);
+  //analytic
+  router.get("/api/get-chart-data", adminController.handleGetChartData);
+  router.get("/api/best-saler", adminController.handleBestSaler);
 
   //product
   router.get(

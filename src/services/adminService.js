@@ -240,7 +240,34 @@ let searchByFilter = (name, sid, sortBy, category) => {
 };
 
 let bestSaler = (sid) => {
-  return new Promise(async (resolve, reject) => {});
+  return new Promise(async (resolve, reject) => {
+    try {
+      let data = await db.execute(
+        "select *,SUM(order_item.quantity) as sold from `order` INNER JOIN order_item ON order_item.orderId = `order`.orderId WHERE `order`.`status`='Accepted' GROUP BY order_item.pid order by sold DESC limit 5;"
+      );
+      let output = [];
+      let rank = data[0];
+      let p0 = await db.execute("select * from product where pid = ?;", [
+        rank[0].pid,
+      ]);
+      let p1 = await db.execute("select * from product where pid = ?;", [
+        rank[1].pid,
+      ]);
+      let p2 = await db.execute("select * from product where pid = ?;", [
+        rank[2].pid,
+      ]);
+      let p3 = await db.execute("select * from product where pid = ?;", [
+        rank[3].pid,
+      ]);
+      let p4 = await db.execute("select * from product where pid = ?;", [
+        rank[4].pid,
+      ]);
+      output = [p0[0][0], p1[0][0], p2[0][0], p3[0][0], p4[0][0]];
+      resolve([data[0], output]);
+    } catch (error) {
+      reject(error);
+    }
+  });
 };
 
 let total30day = (sid) => {
@@ -282,6 +309,25 @@ let totalRevenue = (sid) => {
   });
 };
 
+let getChartData = (sid) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      let products = await db.execute(
+        "select * from `order` inner join order_item on order_item.orderId = `order`.orderId where `order`.status = 'Accepted' ;",
+        [sid]
+      );
+      let newCustomers = await db.execute("select cid,createdAt from user");
+      let orders = await db.execute(
+        "select orderId,createdAt,total from `order` where status = 'Accepted'"
+      );
+
+      resolve([products[0], newCustomers[0], orders[0]]);
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
+
 module.exports = {
   loginAdmin,
   checkExistUserName,
@@ -298,4 +344,6 @@ module.exports = {
   total30day,
   order30day,
   totalRevenue,
+  getChartData,
+  bestSaler,
 };
